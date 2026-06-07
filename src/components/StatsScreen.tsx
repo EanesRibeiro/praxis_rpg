@@ -1,5 +1,5 @@
 import React from 'react';
-import { loadPlayerStats } from '../utils/storage';
+import { loadPlayerStats, clearPlayerStats } from '../utils/storage';
 import { X, Award, BarChart2, CheckCircle } from 'lucide-react';
 import type { VirtueKey } from '../types';
 
@@ -22,9 +22,29 @@ const VIRTUE_LABELS: Record<VirtueKey, string> = {
 };
 
 export const StatsScreen: React.FC<StatsScreenProps> = ({ onClose }) => {
-  const stats = loadPlayerStats();
+  const [stats, setStats] = React.useState(() => loadPlayerStats());
+  const [confirmReset, setConfirmReset] = React.useState(false);
   const totalScenarios = 30; // Total de cenários no pool (6 por categoria * 5 categorias)
   const percentScenariosPlayed = Math.round((stats.uniqueScenariosCount / totalScenarios) * 100);
+
+  const handleReset = () => {
+    if (confirmReset) {
+      clearPlayerStats();
+      setStats(loadPlayerStats());
+      setConfirmReset(false);
+    } else {
+      setConfirmReset(true);
+    }
+  };
+
+  React.useEffect(() => {
+    if (confirmReset) {
+      const timer = setTimeout(() => {
+        setConfirmReset(false);
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [confirmReset]);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-obsidian/95 backdrop-blur-sm select-none animate-fade-in">
@@ -69,11 +89,11 @@ export const StatsScreen: React.FC<StatsScreenProps> = ({ onClose }) => {
           {/* Arquétipo Frequente */}
           <div className="bg-obsidian-3 border border-[#231E1A] p-3.5 rounded-[2px] flex items-center gap-3">
             <Award className="w-5 h-5 text-bronze shrink-0" />
-            <div className="text-left overflow-hidden">
+            <div className="text-left flex-1 min-w-0">
               <div className="font-inter text-[8px] text-ivory-dimmed tracking-[1px] uppercase">
                 Perfil Predominante
               </div>
-              <div className="font-cinzel text-xs font-600 text-ivory truncate" title={stats.mostCommonArchetype}>
+              <div className="font-cinzel text-[10px] sm:text-xs font-600 text-ivory leading-snug uppercase whitespace-normal break-words" title={stats.mostCommonArchetype}>
                 {stats.mostCommonArchetype === 'Nenhum' ? 'Em Progresso' : stats.mostCommonArchetype}
               </div>
             </div>
@@ -129,13 +149,25 @@ export const StatsScreen: React.FC<StatsScreenProps> = ({ onClose }) => {
           </div>
         </div>
 
-        {/* Botão de Fechar */}
-        <button
-          onClick={onClose}
-          className="w-full py-2.5 bg-transparent border border-[#2E2E2E] hover:border-bronze text-ivory-dim hover:text-bronze font-cinzel text-[11px] font-600 tracking-[2px] uppercase rounded-sm cursor-pointer transition-all duration-200 outline-none"
-        >
-          Retornar
-        </button>
+        {/* Botões de Ação */}
+        <div className="flex gap-3 w-full">
+          <button
+            onClick={handleReset}
+            className={`flex-1 py-2.5 bg-transparent border font-cinzel text-[10px] sm:text-[11px] font-600 tracking-[2px] uppercase rounded-sm cursor-pointer transition-all duration-200 outline-none ${
+              confirmReset
+                ? 'border-red-600 text-red-500 hover:bg-red-950/20'
+                : 'border-red-950/40 hover:border-red-600 text-red-400/70 hover:text-red-400'
+            }`}
+          >
+            {confirmReset ? 'Confirmar?' : 'Resetar'}
+          </button>
+          <button
+            onClick={onClose}
+            className="flex-1 py-2.5 bg-transparent border border-[#2E2E2E] hover:border-bronze text-ivory-dim hover:text-bronze font-cinzel text-[10px] sm:text-[11px] font-600 tracking-[2px] uppercase rounded-sm cursor-pointer transition-all duration-200 outline-none"
+          >
+            Retornar
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -283,6 +283,18 @@ export function loadPlayerStats(): PlayerStats {
   }
 }
 
+export function clearPlayerStats(): void {
+  try {
+    localStorage.removeItem(STATS_KEY);
+    localStorage.removeItem(UNIQUE_GLOBAL_KEY);
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(PLAYED_KEY);
+  } catch (e) {
+    console.error('Falha ao resetar estatísticas do jogador:', e);
+  }
+}
+
+
 // ==========================================
 // PERSISTÊNCIA DOS DESAFIOS DIÁRIOS
 // ==========================================
