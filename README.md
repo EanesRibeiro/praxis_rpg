@@ -15,21 +15,35 @@ Ao longo do jogo, suas decisões alteram dinamicamente seus níveis de:
 *   **Justiça (Justice)**: Ação em prol do bem comum e equidade social.
 *   **Temperança (Temperance)**: Autocontrole, moderação de desejos e disciplina biológica.
 
+*Dica: Passe o mouse (ou toque) sobre as barras de virtudes na barra lateral para ler uma explicação detalhada sobre cada uma delas.*
+
 ### Ataraxia (A Paz de Espírito)
 Representa sua tranquilidade interna. Algumas decisões trazem paz imediata ao abrir mão do controle do que é externo, enquanto outras testam sua serenidade em prol de um dever moral maior.
 
-### Sistema de Rejogabilidade (Fase 7)
-O jogo possui um pool de **30 cenários históricos e autênticos** (6 para cada uma das 5 categorias fixas):
-1.  **Trabalho**: Dilemas éticos, corporativos e de liderança.
-2.  **Vida Pessoal**: Conflitos familiares, amizade e integridade íntima.
-3.  **Crise**: Situações de perda abrupta, calúnia e ruína.
-4.  **Saúde**: Limites do corpo, abstinência voluntária e envelhecimento.
-5.  **Filosofia**: Integridade conceitual, bajulação e virtude no anonimato.
+### Modos de Jogo
+Na tela de introdução, o jogador pode escolher entre três modalidades de jornada:
+1.  **Jornada Padrão**: O fluxo clássico do jogo com 5 dilemas, sorteando exatamente 1 dilema de cada uma das 5 categorias disponíveis do pool.
+2.  **Desafio Diário (☀)**: Uma sequência especial de 5 dilemas que é idêntica para todos os jogadores que jogarem no mesmo dia civil (baseado na data local). Concluir este modo garante um selo visual exclusivo de Desafio Diário no card de resultado.
+3.  **Modo Rápido**: Uma jornada ágil contendo apenas 3 dilemas (selecionados das categorias Trabalho, Vida Pessoal e Crise), ideal para sessões rápidas e sem interferir nas estatísticas principais da sua conta.
 
-A cada nova rodada, a aplicação sorteia **exatamente 1 dilema de cada categoria**, proporcionando **7.776 combinações únicas de jornada**.
+### Registro da Alma (Estatísticas de Caráter)
+O jogo monitora sua progressão ao longo de todas as rodadas completadas, acumulando dados de forma contínua no navegador:
+*   **Jornadas Completas**: Quantidade de sessões padrão finalizadas.
+*   **Perfil Predominante**: O arquétipo de tomada de decisão em que você mais obteve correspondência historicamente.
+*   **Dilemas Enfrentados**: Acompanhamento visual de quantos cenários únicos de ascese você já experimentou (X/30). Um ícone discreto `⚡` é exibido ao lado do título da Arena caso você já tenha enfrentado aquele dilema em rodadas passadas.
+*   **Médias Gerais das Virtudes**: A média geral de pontuação obtida em cada virtude cardeal ao longo das partidas.
 
-### Exportação e Compartilhamento
-Ao final da jornada de 5 dilemas, o jogador recebe um arquétipo de caráter dominante (ex: *O Sábio Contemplativo*, *O Guardião Inabalável*, etc.) e pode gerar e exportar um card personalizado de alta fidelidade (PNG de 1600x900px) idealizado para compartilhamento no LinkedIn ou outras redes sociais.
+### Salvamento Ativo de Progresso
+Não se preocupe em fechar a aba do navegador. O jogo salva o progresso do dilema e o estado das suas virtudes automaticamente em tempo real. Ao reabrir a página, o botão pulsante **Retomar Jornada** estará disponível para você continuar exatamente de onde parou.
+
+### Exportação e Compartilhamento de Resultados
+Ao final de cada jornada de dilemas, você recebe um arquétipo de caráter dominante (ex. *O Sábio Contemplativo*, *O Guardião Inabalável*, *O Árbitro Justo*, *O Mestre do Equilíbrio*) e tem duas opções de compartilhamento:
+1.  **Card PNG do LinkedIn**: Gera e faz o download de uma imagem de alta resolução (escala `@2x` de 1600x900px) contendo seu nome, arquétipo, pontuações e nível de Ataraxia.
+2.  **Link de Resultado Direto**: Copia um link encriptado em Base64 no hash da URL (ex: `#result=...`). Ao acessar esse link, qualquer pessoa consegue carregar e visualizar diretamente sua tela de resultados para comparar as virtudes.
+
+### Atalhos de Teclado Rápidos
+*   **Espaço ou Enter**: No painel de consequência e citação de feedback do filósofo, pressione qualquer uma dessas teclas para continuar rapidamente para o próximo dilema.
+*   **Tecla R**: Em andamento ou na tela de resultados, pressione a tecla `R` para redefinir e reiniciar o jogo (pede confirmação caso você esteja no meio de uma partida ativa).
 
 ---
 
@@ -75,18 +89,11 @@ Para rodar o projeto em sua máquina local, certifique-se de ter o [Node.js](htt
 
 Este repositório está configurado com **GitHub Actions** para automação de CI/CD.
 
-Toda vez que um novo commit é enviado para as branches `main` ou `master`, o workflow em `.github/workflows/deploy.yml` executa as seguintes tarefas:
+Toda vez que um novo commit é enviado para a branch `main`, o workflow em `.github/workflows/deploy.yml` executa as seguintes tarefas:
 1.  Realiza o checkout do repositório.
 2.  Instala as dependências de forma limpa.
 3.  Executa o build de produção do Vite.
 4.  Publica os arquivos gerados no diretório `dist/` na branch `gh-pages` de forma automática.
-
-### Ativando no GitHub:
-1. Vá até a aba **Settings** do seu repositório no GitHub.
-2. Acesse a seção **Pages** na barra lateral esquerda.
-3. Em **Build and deployment**, sob **Source**, selecione **Deploy from a branch**.
-4. Em **Branch**, selecione `gh-pages` e a pasta `/ (root)`.
-5. Clique em **Save**. O jogo estará público em minutos!
 
 ---
 
