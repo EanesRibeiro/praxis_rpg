@@ -41,6 +41,11 @@ Ao final de cada jornada de dilemas, você recebe um arquétipo de caráter domi
 1.  **Card PNG do LinkedIn**: Gera e faz o download de uma imagem de alta resolução (escala `@2x` de 1600x900px) contendo seu nome, arquétipo, pontuações e nível de Ataraxia.
 2.  **Link de Resultado Direto**: Copia um link encriptado em Base64 no hash da URL (ex: `#result=...`). Ao acessar esse link, qualquer pessoa consegue carregar e visualizar diretamente sua tela de resultados para comparar as virtudes.
 
+### Feedback de Impacto e Imersão Estética
+O jogo utiliza recursos visuais dinâmicos para aprofundar a experiência reflexiva do jogador:
+*   **Pílulas Flutuantes de Impacto**: Ao tomar uma decisão, pequenas pílulas animadas exibem o delta de variação de cada virtude (ex: `+15`, `-10`) flutuando e sumindo suavemente na barra lateral ao longo de `800ms`.
+*   **Vinheta de Crise**: Caso seu nível de Ataraxia (paz de espírito) caia abaixo de `40%`, uma vinheta escura é projetada nas bordas da tela e a saturação geral da interface é levemente reduzida, simulando visualmente o peso e a urgência psicológica da situação de desequilíbrio.
+
 ### Atalhos de Teclado Rápidos
 *   **Espaço ou Enter**: No painel de consequência e citação de feedback do filósofo, pressione qualquer uma dessas teclas para continuar rapidamente para o próximo dilema.
 *   **Tecla R**: Em andamento ou na tela de resultados, pressione a tecla `R` para redefinir e reiniciar o jogo (pede confirmação caso você esteja no meio de uma partida ativa).
