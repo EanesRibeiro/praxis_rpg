@@ -1,25 +1,45 @@
 import type { GameState, Scenario, Virtues, VirtueKey, ArchetypeKey, Profile, ScenarioCategory, ChoiceRecord } from '../types';
 import { savePlayedScenarioId } from './storage';
+import { ORDERED_CATEGORIES } from '../constants/categories';
 
 export function clamp(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, value));
 }
 
-const ORDERED_CATEGORIES: ScenarioCategory[] = [
-  'Trabalho', 'Vida Pessoal', 'Crise', 'Saúde', 'Filosofia'
-];
+// PRNG simples baseado em seed string (como "2026-06-07")
+function seedRandom(seedStr: string) {
+  let hash = 0;
+  for (let i = 0; i < seedStr.length; i++) {
+    hash = seedStr.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return function() {
+    const x = Math.sin(hash++) * 10000;
+    return x - Math.floor(x);
+  };
+}
 
 export function drawSessionScenarios(
   pool: Record<ScenarioCategory, Scenario[]>,
-  history: ChoiceRecord[]
+  history: ChoiceRecord[],
+  dailyDateSeed?: string,
+  isQuickMode?: boolean
 ): Scenario[] {
   const playedIds = new Set(history.map(r => r.scenarioId));
+  const categoriesToUse = isQuickMode 
+    ? ORDERED_CATEGORIES.slice(0, 3) 
+    : ORDERED_CATEGORIES;
 
-  return ORDERED_CATEGORIES.map(category => {
-    const available = pool[category].filter(s => !playedIds.has(s.id));
-    // Se todos já foram jogados nessa categoria, reseta o pool dela
+  const randFunc = dailyDateSeed ? seedRandom(dailyDateSeed) : Math.random;
+
+  return categoriesToUse.map(category => {
+    // Para o Desafio Diário, não filtramos os já jogados para garantir que todos joguem exatamente a mesma sequência do dia civil!
+    const available = dailyDateSeed 
+      ? pool[category] 
+      : pool[category].filter(s => !playedIds.has(s.id));
+      
     const candidates = available.length > 0 ? available : pool[category];
-    return candidates[Math.floor(Math.random() * candidates.length)];
+    const idx = Math.floor(randFunc() * candidates.length);
+    return candidates[idx];
   });
 }
 
@@ -27,8 +47,8 @@ export function makeChoice(state: GameState, choiceIndex: 0 | 1, scenarios: Scen
   const scenario = scenarios[state.currentScenarioIndex];
   const choice = scenario.choices[choiceIndex];
 
-  // Grava o ID no histórico de jogados imediatamente no momento da escolha
-  savePlayedScenarioId(scenario.id);
+  // Grava o ID no histórico de jogados imediatamente no momento da escolha, passando a categoria
+  savePlayedScenarioId(scenario.id, scenario.category);
 
   const newVirtues = { ...state.virtues };
   (Object.entries(choice.impact) as [VirtueKey, number][]).forEach(([key, delta]) => {
@@ -57,8 +77,18 @@ export function getProfile(virtues: Virtues, ataraxia: number): Profile {
     equilibrado:   virtues.temperance * 1.5 + virtues.courage * 0.5,
   };
 
-  const dominant = (Object.entries(scores) as [ArchetypeKey, number][])
-    .sort((a, b) => b[1] - a[1])[0][0];
+  // Tratamento de empate total (ex: no início, onde todas as virtudes são iguais)
+  const allEqual = virtues.wisdom === virtues.courage && 
+                   virtues.courage === virtues.justice && 
+                   virtues.justice === virtues.temperance;
+
+  let dominant: ArchetypeKey;
+  if (allEqual) {
+    dominant = 'equilibrado';
+  } else {
+    dominant = (Object.entries(scores) as [ArchetypeKey, number][])
+      .sort((a, b) => b[1] - a[1])[0][0];
+  }
 
   const suffix = ataraxia >= 80 ? ' Iluminado' : ataraxia < 45 ? ' em Formação' : '';
 

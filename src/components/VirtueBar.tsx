@@ -14,6 +14,13 @@ const COLOR_MAP: Record<VirtueKey, string> = {
   temperance: '#EF9F27',  // Âmbar
 };
 
+const VIRTUE_DESCRIPTIONS: Record<VirtueKey, string> = {
+  wisdom: 'Sabedoria: Discernimento do que é bom, ruim ou indiferente.',
+  courage: 'Coragem: Firmeza da mente diante do medo, dor ou perigo.',
+  justice: 'Justiça: Dar a cada um o seu devido valor e agir com equidade.',
+  temperance: 'Temperança: Autodomínio, moderação e controle dos impulsos.',
+};
+
 export const VirtueBar: React.FC<VirtueBarProps> = ({ name, virtueKey, value }) => {
   const [animatedWidth, setAnimatedWidth] = useState(0);
   const [delta, setDelta] = useState<number | null>(null);
@@ -51,7 +58,10 @@ export const VirtueBar: React.FC<VirtueBarProps> = ({ name, virtueKey, value }) 
   }, [delta, animationKey]);
 
   return (
-    <div className="flex flex-col gap-1.5 w-full select-none">
+    <div 
+      title={VIRTUE_DESCRIPTIONS[virtueKey]} 
+      className="flex flex-col gap-1.5 w-full select-none cursor-help"
+    >
       {/* Informações da Virtude */}
       <div className="flex justify-between items-center">
         <span className="font-inter text-[10px] font-500 text-ivory-muted tracking-[1.5px] uppercase">

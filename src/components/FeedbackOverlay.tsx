@@ -16,12 +16,23 @@ const VIRTUE_LABELS_FULL: Record<VirtueKey, string> = {
 export const FeedbackOverlay: React.FC<FeedbackOverlayProps> = ({ choice, onContinue }) => {
   const [isExiting, setIsExiting] = useState(false);
 
-  const handleContinue = () => {
+  const handleContinue = React.useCallback(() => {
     setIsExiting(true);
     setTimeout(() => {
       onContinue();
     }, 150); // Tempo correspondente à duração do fade-out
-  };
+  }, [onContinue]);
+
+  React.useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault(); // Evita scroll do espaço
+        handleContinue();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [handleContinue]);
 
   const renderPill = (label: string, value: number) => {
     const isPos = value >= 0;
@@ -101,12 +112,17 @@ export const FeedbackOverlay: React.FC<FeedbackOverlayProps> = ({ choice, onCont
         </div>
 
         {/* Botão Continuar */}
-        <button
-          onClick={handleContinue}
-          className="mt-4 px-7 py-2.5 border border-bronze text-bronze hover:bg-bronze hover:text-obsidian font-cinzel text-[11px] font-600 tracking-[2px] uppercase rounded-sm cursor-pointer transition-all duration-200 outline-none"
-        >
-          Continuar →
-        </button>
+        <div className="mt-4 flex flex-col items-center gap-2">
+          <button
+            onClick={handleContinue}
+            className="px-7 py-2.5 border border-bronze text-bronze hover:bg-bronze hover:text-obsidian font-cinzel text-[11px] font-600 tracking-[2px] uppercase rounded-sm cursor-pointer transition-all duration-200 outline-none"
+          >
+            Continuar →
+          </button>
+          <span className="font-inter text-[8px] text-ivory-dimmed tracking-[1px] uppercase">
+            [ Pressione Espaço ou Enter ]
+          </span>
+        </div>
       </div>
     </div>
   );

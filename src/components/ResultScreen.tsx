@@ -2,13 +2,14 @@ import React, { useRef, useState } from 'react';
 import type { Virtues } from '../types';
 import { getProfile } from '../utils/gameLogic';
 import { ResultCard } from './ResultCard';
-import { Download, Clipboard, Check } from 'lucide-react';
+import { Download, Clipboard, Check, Share2 } from 'lucide-react';
 import html2canvas from 'html2canvas';
 
 interface ResultScreenProps {
   virtues: Virtues;
   ataraxia: number;
   onReset: () => void;
+  isDailyChallenge?: boolean;
 }
 
 const VIRTUE_COLORS = {
@@ -18,11 +19,17 @@ const VIRTUE_COLORS = {
   temperance: '#EF9F27',
 };
 
-export const ResultScreen: React.FC<ResultScreenProps> = ({ virtues, ataraxia, onReset }) => {
+export const ResultScreen: React.FC<ResultScreenProps> = ({ 
+  virtues, 
+  ataraxia, 
+  onReset,
+  isDailyChallenge 
+}) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [userName, setUserName] = useState('');
   const [isExporting, setIsExporting] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
 
   const profile = getProfile(virtues, ataraxia);
 
@@ -46,16 +53,31 @@ Jogue aqui: https://eanesribeiro.github.io/praxis_rpg/
     }
   };
 
+  const handleCopyShareLink = async () => {
+    const resultData = { virtues, ataraxia };
+    const code = btoa(unescape(encodeURIComponent(JSON.stringify(resultData))));
+    const shareUrl = `${window.location.origin}${window.location.pathname}#result=${code}`;
+
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setLinkCopied(true);
+      setTimeout(() => {
+        setLinkCopied(false);
+      }, 2000);
+    } catch (err) {
+      console.error('Falha ao copiar link de compartilhamento:', err);
+    }
+  };
+
   const handleExport = async () => {
     if (!cardRef.current || isExporting) return;
     setIsExporting(true);
 
-    // Pequeno delay para garantir que qualquer renderização de estado anterior terminou e posicionamento limpo para captura
     setTimeout(async () => {
       try {
         const canvas = await html2canvas(cardRef.current!, {
           backgroundColor: '#0D0D0D',
-          scale: 2, // Mantém alta qualidade para exibição no feed do LinkedIn
+          scale: 2,
           useCORS: true,
           allowTaint: true,
           logging: false,
@@ -76,6 +98,13 @@ Jogue aqui: https://eanesribeiro.github.io/praxis_rpg/
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-transparent text-center p-6 sm:p-8 animate-slide-up select-none">
       
+      {/* Selo do Desafio Diário */}
+      {isDailyChallenge && (
+        <div className="mb-4 px-3 py-1.5 bg-bronze/10 border border-bronze text-bronze rounded-[2px] font-cinzel text-[9px] font-600 tracking-[2px] uppercase animate-pulse">
+          ☀ Desafio Diário Concluído
+        </div>
+      )}
+
       {/* Selo Circular */}
       <div className="w-[80px] h-[80px] rounded-full border-2 border-bronze relative flex items-center justify-center bg-obsidian-2 mb-6">
         <div className="absolute inset-1 rounded-full border border-bronze-dark" />
@@ -178,6 +207,19 @@ Jogue aqui: https://eanesribeiro.github.io/praxis_rpg/
         >
           {copied ? <Check className="w-3.5 h-3.5" /> : <Clipboard className="w-3.5 h-3.5" />}
           {copied ? 'Copiado!' : 'Copiar Texto para Post do LinkedIn'}
+        </button>
+
+        {/* Botão Copiar Link de Compartilhamento */}
+        <button
+          onClick={handleCopyShareLink}
+          className={`flex items-center justify-center gap-2 w-full py-2.5 border bg-obsidian-2 font-cinzel text-[11px] font-600 tracking-[1px] uppercase rounded-sm cursor-pointer transition-all duration-200 outline-none ${
+            linkCopied
+              ? 'border-impact-pos-text text-impact-pos-text hover:bg-impact-pos-bg/10'
+              : 'border-bronze-dark text-ivory hover:bg-obsidian-4'
+          }`}
+        >
+          {linkCopied ? <Check className="w-3.5 h-3.5" /> : <Share2 className="w-3.5 h-3.5" />}
+          {linkCopied ? 'Link Copiado!' : 'Copiar Link de Resultado'}
         </button>
 
         {/* Botão Jogar Novamente */}

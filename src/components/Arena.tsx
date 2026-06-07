@@ -2,6 +2,7 @@ import React from 'react';
 import type { Scenario, Virtues } from '../types';
 import { ChoiceButton } from './ChoiceButton';
 import { Sidebar } from './Sidebar';
+import { loadPlayedIndex } from '../utils/storage';
 
 interface ArenaProps {
   scenario: Scenario;
@@ -18,6 +19,9 @@ export const Arena: React.FC<ArenaProps> = ({
   totalSteps,
   onSelectChoice,
 }) => {
+  const playedIndex = loadPlayedIndex();
+  const alreadyPlayed = Object.values(playedIndex).some(ids => ids.includes(scenario.id));
+
   return (
     <section 
       key={scenario.id}
@@ -34,8 +38,16 @@ export const Arena: React.FC<ArenaProps> = ({
       </div>
 
       {/* Scenario Title */}
-      <h1 className="font-cinzel text-xl font-600 text-ivory leading-[1.3] mb-3.5">
+      <h1 className="font-cinzel text-xl font-600 text-ivory leading-[1.3] mb-3.5 flex items-center gap-2">
         {scenario.title}
+        {alreadyPlayed && (
+          <span 
+            title="Você já enfrentou este dilema em uma jornada anterior." 
+            className="text-[12px] text-bronze cursor-help select-none animate-pulse"
+          >
+            ⚡
+          </span>
+        )}
       </h1>
 
       {/* Divider */}

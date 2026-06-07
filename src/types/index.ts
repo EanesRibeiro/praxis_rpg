@@ -34,7 +34,7 @@ export interface Scenario {
 
 export interface ChoiceRecord {
   scenarioId: string;
-  choiceIndex: 0 | 1;
+  choiceIndex: 0 | 1 | -1;
   timestamp: number;
 }
 
@@ -48,6 +48,8 @@ export interface GameState {
   phase: GamePhase;
   lastChoice: Choice | null;   // Para renderizar o feedback overlay
   sessionScenarios: Scenario[]; // Cenários sorteados para a sessão atual
+  isDailyChallenge?: boolean;   // Flag para desafio diário
+  isQuickMode?: boolean;         // Flag para modo rápido
 }
 
 export interface Profile {
