@@ -6,7 +6,7 @@ interface IntroScreenProps {
 
 export const IntroScreen: React.FC<IntroScreenProps> = ({ onStart }) => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-obsidian text-center px-6 py-12 select-none">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-transparent text-center px-6 py-12 select-none">
       <div className="max-w-[420px] w-full flex flex-col items-center">
         
         {/* Símbolo Estoico Central */}

@@ -41,3 +41,47 @@
 .animate-slide-up {
   animation: slideUp 400ms ease forwards;
 }
+
+@keyframes floatUp {
+  0% { opacity: 0; transform: translateY(6px); }
+  15% { opacity: 1; transform: translateY(0); }
+  75% { opacity: 1; transform: translateY(-4px); }
+  100% { opacity: 0; transform: translateY(-12px); }
+}
+
+.animate-float-up {
+  animation: floatUp 800ms cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes arenaEnter {
+  0% { opacity: 0; transform: translateX(4px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+.animate-arena-enter {
+  animation: arenaEnter 300ms ease-out forwards;
+}
+
+@keyframes floatParticle1 {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.03; }
+  50% { transform: translate(40px, -60px) scale(1.2); opacity: 0.08; }
+  100% { transform: translate(0, 0) scale(1); opacity: 0.03; }
+}
+
+@keyframes floatParticle2 {
+  0% { transform: translate(0, 0) scale(1.1); opacity: 0.05; }
+  50% { transform: translate(-50px, 40px) scale(0.9); opacity: 0.02; }
+  100% { transform: translate(0, 0) scale(1.1); opacity: 0.05; }
+}
+
+@keyframes floatParticle3 {
+  0% { transform: translate(0, 0) scale(1); opacity: 0.04; }
+  50% { transform: translate(60px, 50px) scale(1.15); opacity: 0.09; }
+  100% { transform: translate(0, 0) scale(1); opacity: 0.04; }
+}
+
+.animate-particle-1 { animation: floatParticle1 28s ease-in-out infinite; }
+.animate-particle-2 { animation: floatParticle2 36s ease-in-out infinite; }
+.animate-particle-3 { animation: floatParticle3 32s ease-in-out infinite; }
+.animate-particle-4 { animation: floatParticle1 42s ease-in-out infinite reverse; }
+.animate-particle-5 { animation: floatParticle2 38s ease-in-out infinite reverse; }

@@ -45,6 +45,8 @@ export default {
       animation: {
         'fade-in': 'fadeIn 200ms ease-in forwards',
         'fade-out': 'fadeOut 150ms ease-out forwards',
+        'float-up': 'floatUp 800ms cubic-bezier(0.25, 1, 0.5, 1) forwards',
+        'arena-enter': 'arenaEnter 300ms ease-out forwards',
       },
       keyframes: {
         fadeIn: {
@@ -54,6 +56,16 @@ export default {
         fadeOut: {
           '0%': { opacity: '1' },
           '100%': { opacity: '0' },
+        },
+        floatUp: {
+          '0%': { opacity: '0', transform: 'translateY(6px)' },
+          '15%': { opacity: '1', transform: 'translateY(0)' },
+          '75%': { opacity: '1', transform: 'translateY(-4px)' },
+          '100%': { opacity: '0', transform: 'translateY(-12px)' },
+        },
+        arenaEnter: {
+          '0%': { opacity: '0', transform: 'translateX(4px)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
         },
       },
     },

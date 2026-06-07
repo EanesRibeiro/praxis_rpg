@@ -9,7 +9,7 @@ interface GameLayoutProps {
 
 export const GameLayout: React.FC<GameLayoutProps> = ({ virtues, children }) => {
   return (
-    <div className="flex flex-col sm:grid sm:grid-cols-[1fr_200px] w-full min-h-[calc(100vh-65px)] bg-obsidian">
+    <div className="flex flex-col sm:grid sm:grid-cols-[1fr_200px] w-full min-h-[calc(100vh-65px)] bg-transparent">
       {/* Coluna Esquerda: Arena do Dilema */}
       <main className="flex-grow flex items-center justify-center py-6 sm:py-8">
         {children}
