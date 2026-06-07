@@ -7,6 +7,8 @@ import {
   updatePlayedIndexAfterDraw,
   saveGameProgress,
   clearGameProgress,
+  saveDailyProgress,
+  clearDailyProgress,
   updatePlayerStats,
   saveDailyChallengeCompleted
 } from '../utils/storage';
@@ -50,6 +52,7 @@ function gameReducer(state: GameState, action: Action): GameState {
         sessionScenarios: chosen,
         isDailyChallenge: action.isDailyChallenge,
         isQuickMode: action.isQuickMode,
+        dailyDateSeed: action.dailyDateSeed,
         phase: 'game',
         currentScenarioIndex: 0,
         choicesHistory: [],
@@ -109,13 +112,16 @@ export function useGameState() {
 
       if (state.isDailyChallenge) {
         saveDailyChallengeCompleted(new Date().toISOString().slice(0, 10));
+        clearDailyProgress();
+      } else {
+        clearGameProgress();
       }
-
-      clearGameProgress();
     } else if (state.phase === 'game' || state.phase === 'feedback') {
-      saveGameProgress(state);
-    } else if (state.phase === 'intro') {
-      clearGameProgress();
+      if (state.isDailyChallenge) {
+        saveDailyProgress(state);
+      } else {
+        saveGameProgress(state);
+      }
     }
   }, [state.phase, state.virtues, state.ataraxia, state.isQuickMode, state.isDailyChallenge, state.choicesHistory]);
 

@@ -50,6 +50,7 @@ export interface GameState {
   sessionScenarios: Scenario[]; // Cenários sorteados para a sessão atual
   isDailyChallenge?: boolean;   // Flag para desafio diário
   isQuickMode?: boolean;         // Flag para modo rápido
+  dailyDateSeed?: string;        // Seed da data do desafio diário
 }
 
 export interface Profile {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { loadGameProgress, isDailyChallengeCompleted } from '../utils/storage';
+import { loadGameProgress, loadDailyProgress, isDailyChallengeCompleted } from '../utils/storage';
 
 interface IntroScreenProps {
   onStart: (isDaily?: boolean, isQuick?: boolean) => void;
@@ -13,8 +13,10 @@ export const IntroScreen: React.FC<IntroScreenProps> = ({
   onOpenStats 
 }) => {
   const savedProgress = loadGameProgress();
+  const dailyProgress = loadDailyProgress();
   const todayStr = new Date().toISOString().slice(0, 10);
   const dailyCompleted = isDailyChallengeCompleted(todayStr);
+  const isDailyPending = dailyProgress && dailyProgress.dailyDateSeed === todayStr;
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-transparent text-center px-6 py-12 select-none animate-fade-in">
@@ -45,60 +47,91 @@ export const IntroScreen: React.FC<IntroScreenProps> = ({
         </p>
 
         {/* Lista de Ações de Início */}
-        <div className="flex flex-col gap-3 w-full max-w-[280px]">
+        <div className="flex flex-col gap-4 w-full max-w-[280px]">
           {savedProgress && (
-            <button
-              onClick={() => onLoadProgress(savedProgress)}
-              className="w-full py-3 bg-bronze/10 border border-bronze text-bronze hover:bg-bronze hover:text-obsidian font-cinzel text-[11px] font-600 tracking-[2px] uppercase rounded-sm cursor-pointer transition-all duration-200 outline-none animate-pulse"
-            >
-              Retomar Jornada ({savedProgress.currentScenarioIndex + 1}/{savedProgress.sessionScenarios.length})
-            </button>
+            <div className="flex flex-col w-full gap-1 mb-1">
+              <button
+                onClick={() => onLoadProgress(savedProgress)}
+                className="w-full py-3 bg-bronze/10 border border-bronze text-bronze hover:bg-bronze hover:text-obsidian font-cinzel text-[11px] font-600 tracking-[2px] uppercase rounded-sm cursor-pointer transition-all duration-200 outline-none animate-pulse text-center"
+              >
+                ▶ Continuar Partida ({savedProgress.currentScenarioIndex + 1}/{savedProgress.sessionScenarios.length})
+              </button>
+              <div className="w-full h-[1px] bg-[#2A2520]/60 mt-3" />
+            </div>
           )}
 
-          <button
-            onClick={() => {
-              if (savedProgress && !window.confirm('Tem certeza? Seu progresso salvo da jornada anterior será perdido.')) {
-                return;
-              }
-              onStart(false, false);
-            }}
-            className="w-full py-3 border border-bronze text-bronze hover:bg-bronze hover:text-obsidian font-cinzel text-[11px] font-600 tracking-[2px] uppercase rounded-sm cursor-pointer transition-all duration-200 outline-none"
-          >
-            Jornada Padrão
-          </button>
+          {/* Bloco Jornada Clássica */}
+          <div className="flex flex-col w-full gap-1.5">
+            <button
+              onClick={() => {
+                if (savedProgress && !window.confirm('Tem certeza? Seu progresso salvo da jornada clássica anterior será perdido.')) {
+                  return;
+                }
+                onStart(false, false);
+              }}
+              className="w-full py-3 border border-bronze text-bronze hover:bg-bronze hover:text-obsidian font-cinzel text-[11px] font-600 tracking-[2px] uppercase rounded-sm cursor-pointer transition-all duration-200 outline-none text-center"
+            >
+              📜 Jornada Clássica
+            </button>
+            <p className="font-inter text-[10px] text-ivory-dim/60 tracking-[0.5px] leading-relaxed select-none px-1 text-center">
+              5 dilemas aleatórios. Sem restrições. Salva estatísticas.
+            </p>
+          </div>
 
-          <button
-            disabled={dailyCompleted}
-            onClick={() => {
-              if (savedProgress && !window.confirm('Tem certeza? Seu progresso salvo da jornada anterior será perdido.')) {
-                return;
-              }
-              onStart(true, false);
-            }}
-            className="w-full py-3 border border-[#3E3E3E] text-ivory-dim hover:border-bronze hover:text-bronze font-cinzel text-[11px] font-600 tracking-[2px] uppercase rounded-sm cursor-pointer transition-all duration-200 outline-none disabled:opacity-50 disabled:cursor-not-allowed disabled:border-[#1C1C1C] disabled:text-[#4A4238] disabled:hover:text-[#4A4238]"
-          >
-            {dailyCompleted ? '☀ Desafio Diário (Concluído hoje)' : '☀ Desafio Diário'}
-          </button>
+          {/* Bloco Desafio do Dia */}
+          <div className="flex flex-col w-full gap-1.5">
+            {dailyCompleted ? (
+              <button
+                disabled
+                className="w-full py-3 border border-[#1D1A18] text-[#5C5246] font-cinzel text-[11px] font-600 tracking-[2px] uppercase rounded-sm cursor-not-allowed outline-none opacity-60 text-center"
+              >
+                ☀️ Desafio do Dia ✔️ (Concluído)
+              </button>
+            ) : isDailyPending ? (
+              <button
+                onClick={() => onLoadProgress(dailyProgress)}
+                className="w-full py-3 bg-bronze/10 border border-bronze text-bronze hover:bg-bronze hover:text-obsidian font-cinzel text-[11px] font-600 tracking-[2px] uppercase rounded-sm cursor-pointer transition-all duration-200 outline-none animate-pulse text-center"
+              >
+                ☀️ Retomar Desafio ({dailyProgress.currentScenarioIndex + 1}/{dailyProgress.sessionScenarios.length})
+              </button>
+            ) : (
+              <button
+                onClick={() => onStart(true, false)}
+                className="w-full py-3 border border-[#3E3E3E] text-ivory-dim hover:border-bronze hover:text-bronze font-cinzel text-[11px] font-600 tracking-[2px] uppercase rounded-sm cursor-pointer transition-all duration-200 outline-none text-center"
+              >
+                ☀️ Desafio do Dia
+              </button>
+            )}
+            <p className="font-inter text-[10px] text-ivory-dim/60 tracking-[0.5px] leading-relaxed select-none px-1 text-center">
+              5 dilemas fixos (iguais para todos hoje). Uma tentativa por dia. Selo dourado ao concluir.
+            </p>
+          </div>
 
-          <button
-            onClick={() => {
-              if (savedProgress && !window.confirm('Tem certeza? Seu progresso salvo da jornada anterior será perdido.')) {
-                return;
-              }
-              onStart(false, true);
-            }}
-            className="w-full py-3 border border-[#3E3E3E] text-ivory-dim hover:border-bronze hover:text-bronze font-cinzel text-[11px] font-600 tracking-[2px] uppercase rounded-sm cursor-pointer transition-all duration-200 outline-none"
-          >
-            Modo Rápido (3 Dilemas)
-          </button>
+          {/* Bloco Modo Rápido */}
+          <div className="flex flex-col w-full gap-1.5">
+            <button
+              onClick={() => {
+                if (savedProgress && !window.confirm('Tem certeza? Seu progresso salvo da jornada clássica anterior será perdido.')) {
+                  return;
+                }
+                onStart(false, true);
+              }}
+              className="w-full py-3 border border-[#3E3E3E] text-ivory-dim hover:border-bronze hover:text-bronze font-cinzel text-[11px] font-600 tracking-[2px] uppercase rounded-sm cursor-pointer transition-all duration-200 outline-none text-center"
+            >
+              ⚡ Modo Rápido (3 dilemas)
+            </button>
+            <p className="font-inter text-[10px] text-ivory-dim/60 tracking-[0.5px] leading-relaxed select-none px-1 text-center">
+              3 dilemas rápidos. Não afeta estatísticas.
+            </p>
+          </div>
 
-          <div className="w-full h-[1px] bg-[#2A2520] my-2" />
+          <div className="w-full h-[1px] bg-[#2A2520]/60 my-2" />
 
           <button
             onClick={onOpenStats}
-            className="w-full py-2 bg-transparent hover:text-bronze text-ivory-dimmed font-inter text-[10px] font-500 tracking-[2px] uppercase rounded-sm cursor-pointer transition-colors duration-200 outline-none"
+            className="w-full py-2 bg-transparent hover:text-bronze text-ivory-dimmed font-inter text-[10px] font-500 tracking-[2px] uppercase rounded-sm cursor-pointer transition-colors duration-200 outline-none text-center"
           >
-            Ver Registro da Alma (Estatísticas)
+            📊 Ver Registro da Alma (Estatísticas)
           </button>
         </div>
       </div>

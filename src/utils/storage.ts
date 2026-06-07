@@ -311,3 +311,35 @@ export function isDailyChallengeCompleted(dateStr: string): boolean {
     return false;
   }
 }
+
+// ==========================================
+// PERSISTÊNCIA DO PROGRESSO EM ANDAMENTO DO DESAFIO DIÁRIO
+// ==========================================
+
+const DAILY_PROGRESS_KEY = 'askesis_daily_saved_progress';
+
+export function saveDailyProgress(state: GameState): void {
+  try {
+    localStorage.setItem(DAILY_PROGRESS_KEY, JSON.stringify(state));
+  } catch (e) {
+    console.error('Falha ao salvar progresso do desafio diário:', e);
+  }
+}
+
+export function loadDailyProgress(): GameState | null {
+  try {
+    const raw = localStorage.getItem(DAILY_PROGRESS_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+export function clearDailyProgress(): void {
+  try {
+    localStorage.removeItem(DAILY_PROGRESS_KEY);
+  } catch {
+    // Silencia erros
+  }
+}
+
