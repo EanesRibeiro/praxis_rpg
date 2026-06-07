@@ -1,22 +1,25 @@
-import type { GameState, Scenario, Virtues, VirtueKey, ArchetypeKey, Profile, ScenarioCategory } from '../types';
+import type { GameState, Scenario, Virtues, VirtueKey, ArchetypeKey, Profile, ScenarioCategory, ChoiceRecord } from '../types';
 
 export function clamp(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, value));
 }
 
-export function generateSessionScenarios(allScenarios: Scenario[]): Scenario[] {
-  const categories: ScenarioCategory[] = ['Trabalho', 'Vida Pessoal', 'Crise', 'Saúde', 'Filosofia'];
-  const selected: Scenario[] = [];
+const ORDERED_CATEGORIES: ScenarioCategory[] = [
+  'Trabalho', 'Vida Pessoal', 'Crise', 'Saúde', 'Filosofia'
+];
 
-  categories.forEach(category => {
-    const list = allScenarios.filter(s => s.category === category);
-    if (list.length > 0) {
-      const randomIndex = Math.floor(Math.random() * list.length);
-      selected.push(list[randomIndex]);
-    }
+export function drawSessionScenarios(
+  pool: Record<ScenarioCategory, Scenario[]>,
+  history: ChoiceRecord[]
+): Scenario[] {
+  const playedIds = new Set(history.map(r => r.scenarioId));
+
+  return ORDERED_CATEGORIES.map(category => {
+    const available = pool[category].filter(s => !playedIds.has(s.id));
+    // Se todos já foram jogados nessa categoria, reseta o pool dela
+    const candidates = available.length > 0 ? available : pool[category];
+    return candidates[Math.floor(Math.random() * candidates.length)];
   });
-
-  return selected;
 }
 
 export function makeChoice(state: GameState, choiceIndex: 0 | 1, scenarios: Scenario[]): GameState {

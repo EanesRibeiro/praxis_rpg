@@ -1,8 +1,8 @@
 import { useReducer, useEffect } from 'react';
 import type { GameState } from '../types';
-import { makeChoice as applyChoice, getProfile, generateSessionScenarios } from '../utils/gameLogic';
-import { saveSession } from '../utils/storage';
-import { SCENARIOS } from '../data/scenarios';
+import { makeChoice as applyChoice, getProfile, drawSessionScenarios } from '../utils/gameLogic';
+import { saveSession, getPlayedHistory, updatePlayedIndexAfterDraw } from '../utils/storage';
+import { SCENARIO_POOL } from '../data/scenarios';
 
 const getInitialState = (): GameState => ({
   virtues: { wisdom: 60, courage: 60, justice: 60, temperance: 60 },
@@ -22,12 +22,16 @@ type Action =
 
 function gameReducer(state: GameState, action: Action): GameState {
   switch (action.type) {
-    case 'START_GAME':
+    case 'START_GAME': {
+      const history = getPlayedHistory();
+      const chosen = drawSessionScenarios(SCENARIO_POOL, history);
+      updatePlayedIndexAfterDraw(chosen, SCENARIO_POOL);
       return {
         ...state,
-        sessionScenarios: generateSessionScenarios(SCENARIOS),
+        sessionScenarios: chosen,
         phase: 'game',
       };
+    }
     case 'MAKE_CHOICE':
       return applyChoice(state, action.choiceIndex, state.sessionScenarios);
     case 'NEXT_SCENARIO':
@@ -45,11 +49,7 @@ function gameReducer(state: GameState, action: Action): GameState {
         lastChoice: null,
       };
     case 'RESET':
-      return {
-        ...getInitialState(),
-        sessionScenarios: generateSessionScenarios(SCENARIOS),
-        phase: 'intro',
-      };
+      return getInitialState();
     default:
       return state;
   }

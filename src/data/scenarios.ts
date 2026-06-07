@@ -1,7 +1,7 @@
-import type { Scenario } from '../types';
+import type { Scenario, ScenarioCategory } from '../types';
 import { PORTRAITS } from './portraits';
 
-export const SCENARIOS: Scenario[] = [
+const SCENARIOS_INTERNAL: Scenario[] = [
   // ==========================================
   // CATEGORIA 1: TRABALHO (6 Cenários)
   // ==========================================
@@ -862,3 +862,11 @@ export const SCENARIOS: Scenario[] = [
     ]
   }
 ];
+
+export const SCENARIO_POOL: Record<ScenarioCategory, Scenario[]> = {
+  'Trabalho': SCENARIOS_INTERNAL.filter(s => s.category === 'Trabalho'),
+  'Vida Pessoal': SCENARIOS_INTERNAL.filter(s => s.category === 'Vida Pessoal'),
+  'Crise': SCENARIOS_INTERNAL.filter(s => s.category === 'Crise'),
+  'Saúde': SCENARIOS_INTERNAL.filter(s => s.category === 'Saúde'),
+  'Filosofia': SCENARIOS_INTERNAL.filter(s => s.category === 'Filosofia'),
+};
