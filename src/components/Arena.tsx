@@ -19,7 +19,10 @@ export const Arena: React.FC<ArenaProps> = ({
   onSelectChoice,
 }) => {
   return (
-    <section className="flex flex-col p-6 sm:p-[28px_24px] w-full max-w-[560px] mx-auto sm:mx-0 select-none">
+    <section 
+      key={scenario.id}
+      className="flex flex-col p-6 sm:p-[28px_24px] w-full max-w-[560px] mx-auto sm:mx-0 select-none animate-arena-enter"
+    >
       {/* Scenario Meta */}
       <div className="flex items-center gap-3 mb-3.5">
         <span className="px-2.5 py-[3px] border border-[#3A2E22] bg-[#1A1510] text-bronze rounded-[2px] font-inter text-[9px] font-500 tracking-[2.5px] uppercase">

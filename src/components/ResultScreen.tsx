@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import type { Virtues } from '../types';
 import { getProfile } from '../utils/gameLogic';
 import { ResultCard } from './ResultCard';
-import { Download, Clipboard } from 'lucide-react';
+import { Download, Clipboard, Check } from 'lucide-react';
 import html2canvas from 'html2canvas';
 
 interface ResultScreenProps {
@@ -22,6 +22,7 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({ virtues, ataraxia, o
   const cardRef = useRef<HTMLDivElement>(null);
   const [userName, setUserName] = useState('');
   const [isExporting, setIsExporting] = useState(false);
+  const [copied, setCopied] = useState(false);
 
   const profile = getProfile(virtues, ataraxia);
 
@@ -36,7 +37,10 @@ Jogue aqui: https://eanesribeiro.github.io/praxis_rpg/
 
     try {
       await navigator.clipboard.writeText(textToCopy);
-      alert('Texto formatado copiado para a área de transferência! Só colar no LinkedIn junto com o seu card.');
+      setCopied(true);
+      setTimeout(() => {
+        setCopied(false);
+      }, 2000);
     } catch (err) {
       console.error('Falha ao copiar texto: ', err);
     }
@@ -70,7 +74,7 @@ Jogue aqui: https://eanesribeiro.github.io/praxis_rpg/
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-obsidian text-center p-6 sm:p-8 animate-slide-up select-none">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-transparent text-center p-6 sm:p-8 animate-slide-up select-none">
       
       {/* Selo Circular */}
       <div className="w-[80px] h-[80px] rounded-full border-2 border-bronze relative flex items-center justify-center bg-obsidian-2 mb-6">
@@ -166,10 +170,14 @@ Jogue aqui: https://eanesribeiro.github.io/praxis_rpg/
         {/* Botão Copiar Texto */}
         <button
           onClick={handleCopyToClipboard}
-          className="flex items-center justify-center gap-2 w-full py-2.5 border border-bronze-dark bg-obsidian-2 text-ivory hover:bg-obsidian-4 font-cinzel text-[11px] font-600 tracking-[1px] uppercase rounded-sm cursor-pointer transition-all duration-200 outline-none"
+          className={`flex items-center justify-center gap-2 w-full py-2.5 border bg-obsidian-2 font-cinzel text-[11px] font-600 tracking-[1px] uppercase rounded-sm cursor-pointer transition-all duration-200 outline-none ${
+            copied
+              ? 'border-impact-pos-text text-impact-pos-text hover:bg-impact-pos-bg/10'
+              : 'border-bronze-dark text-ivory hover:bg-obsidian-4'
+          }`}
         >
-          <Clipboard className="w-3.5 h-3.5" />
-          Copiar Texto para Post do LinkedIn
+          {copied ? <Check className="w-3.5 h-3.5" /> : <Clipboard className="w-3.5 h-3.5" />}
+          {copied ? 'Copiado!' : 'Copiar Texto para Post do LinkedIn'}
         </button>
 
         {/* Botão Jogar Novamente */}
