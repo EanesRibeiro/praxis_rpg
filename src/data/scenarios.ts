@@ -16,7 +16,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Marco Aurélio',
         quote: 'A melhor vingança é não ser como aquele que causou a injustiça. Aja com justiça social, sem hostilidade.',
         impact: { courage: 15, justice: 10, wisdom: -5 },
-        ataraxiaImpact: 5,
+        ataraxiaImpact: -5,
         feedback: 'Você escolheu defender a verdade objetiva. Expor a coparticipação exige coragem intelectual, mas lembre-se de fazê-lo sem ressentimento ou vaidade pelo reconhecimento.',
         archetype: 'guardião',
         portraitSvg: PORTRAITS['Marco Aurélio']
@@ -44,7 +44,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Epicteto',
         quote: 'Deseja apenas o que está sob teu poder. Cargos e honras pertencem a quem decide concedê-los, não a ti.',
         impact: { wisdom: 15, temperance: 15, courage: 5 },
-        ataraxiaImpact: 15,
+        ataraxiaImpact: 12,
         feedback: 'Ao focar na excelência interna do seu trabalho em vez de sofrer pelo reconhecimento alheio, você neutraliza a frustração e mantém sua paz interior inabalável.',
         archetype: 'contemplativo',
         portraitSvg: PORTRAITS['Epicteto']
@@ -54,7 +54,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Sêneca',
         quote: 'A inveja é a marca de uma mente fraca. O sábio alegra-se com o progresso do outro e analisa o próprio caminho com razão clara.',
         impact: { justice: 15, wisdom: 10, courage: 10 },
-        ataraxiaImpact: 10,
+        ataraxiaImpact: 2,
         feedback: 'Sua escolha reflete inteligência emocional e justiça social. Parabenizar o outro limpa o coração de inveja, enquanto a conversa técnica com a gestão direciona seu esforço racionalmente.',
         archetype: 'árbitro',
         portraitSvg: PORTRAITS['Sêneca']
@@ -72,7 +72,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Sêneca',
         quote: 'Nenhum ganho pessoal vale o preço de trair a própria consciência. O bem comum deve guiar nossas decisões mais difíceis.',
         impact: { justice: 20, courage: 15, wisdom: 5 },
-        ataraxiaImpact: 5,
+        ataraxiaImpact: -10,
         feedback: 'Você agiu com justiça moral e integridade ao proteger sua equipe da politicagem. Recusar-se a sacrificar o outro pela própria segurança é um marco de caráter nobre.',
         archetype: 'árbitro',
         portraitSvg: PORTRAITS['Sêneca']
@@ -100,7 +100,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Epicteto',
         quote: 'Nenhum homem é livre se não for mestre de si mesmo. Não venda sua dignidade por punhados de moedas de prata.',
         impact: { courage: 20, temperance: 10, wisdom: 5 },
-        ataraxiaImpact: 10,
+        ataraxiaImpact: -5,
         feedback: 'Você escolheu proteger a soberania do seu caráter e da sua equipe. Demonstrar que o dinheiro não compra o respeito próprio é a essência da liberdade interior estoica.',
         archetype: 'guardião',
         portraitSvg: PORTRAITS['Epicteto']
@@ -110,7 +110,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Sêneca',
         quote: 'A ira é um vício temporário que apenas destrói quem a carrega. Trate o homem colérico como se fosse uma tempestade no mar: aguarde com calma.',
         impact: { temperance: 20, wisdom: 15, courage: -5 },
-        ataraxiaImpact: 15,
+        ataraxiaImpact: 10,
         feedback: 'Você usou a temperança como escudo mental. Ao encarar a ira do cliente como um problema psicológico dele e não seu, você protegeu a paz interna e salvou o contrato comercial.',
         archetype: 'contemplativo',
         portraitSvg: PORTRAITS['Sêneca']
@@ -128,7 +128,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Marco Aurélio',
         quote: 'O homem que comete injustiça prejudica a si mesmo. Se ele errou, o erro é dele; o meu dever é manter-me útil ao bem comum.',
         impact: { wisdom: 20, justice: 15, courage: 5 },
-        ataraxiaImpact: 10,
+        ataraxiaImpact: 0,
         feedback: 'Sua conduta foi exemplar. Ao focar na solução técnica e na justiça sem ceder ao desejo de vingança pessoal ou humilhação pública, você demonstrou magnanimidade.',
         archetype: 'árbitro',
         portraitSvg: PORTRAITS['Marco Aurélio']
@@ -138,7 +138,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Sêneca',
         quote: 'O erro deve ser confrontado com firmeza racional, não com cólera. O silêncio cúmplice incentiva a maldade; o limite claro a desarma.',
         impact: { courage: 15, temperance: 10, justice: 10 },
-        ataraxiaImpact: 5,
+        ataraxiaImpact: -5,
         feedback: 'Você escolheu o caminho do limite pedagógico. Confrontar o ofensor sem ira, mas com firmeza inabalável, demonstra autocontrole e desencoraja novos ataques espúrios.',
         archetype: 'guardião',
         portraitSvg: PORTRAITS['Sêneca']
@@ -156,7 +156,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Marco Aurélio',
         quote: 'Se alguém me mostrar que estou errado, mudarei com alegria. Busco a verdade que nunca prejudicou ninguém; apenas a teimosia cega fere.',
         impact: { courage: 15, justice: 15, wisdom: 5 },
-        ataraxiaImpact: 5,
+        ataraxiaImpact: -5,
         feedback: 'Você colocou o interesse coletivo e a verdade acima da autopreservação. Mesmo correndo o risco de uma reação defensiva, seu ato protegeu o diretor e a empresa.',
         archetype: 'guardião',
         portraitSvg: PORTRAITS['Marco Aurélio']
@@ -166,7 +166,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Epicteto',
         quote: 'Não tentes consertar o que não te cabe. Deixe que o erro de cada homem sirva de tutor para sua própria vaidade.',
         impact: { temperance: 15, wisdom: 10, courage: -10 },
-        ataraxiaImpact: 15,
+        ataraxiaImpact: 8,
         feedback: 'Você praticou a quietude da não-interferência. Evitar o conflito resguarda sua ataraxia imediata, mas o silêncio diante do erro alheio beira a omissão com o bem do grupo.',
         archetype: 'contemplativo',
         portraitSvg: PORTRAITS['Epicteto']
@@ -188,7 +188,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Sêneca',
         quote: 'A lealdade não pode nos obrigar à mentira ou à desonra. Ajudar um amigo a enfrentar a própria sombra é o verdadeiro ato de amor e dever.',
         impact: { justice: 20, wisdom: 10, courage: 5 },
-        ataraxiaImpact: 15,
+        ataraxiaImpact: -5,
         feedback: 'Você priorizou a justiça e a verdade, as bases de qualquer amizade virtuosa. Recusar a mentira preserva a integridade de ambos e direciona o amigo para o crescimento.',
         archetype: 'árbitro',
         portraitSvg: PORTRAITS['Sêneca']
@@ -198,7 +198,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Epicteto',
         quote: 'Aquele que cede às pressões alheias perde as rédeas de si mesmo. Tornar-se cúmplice da ilusão é escravizar o próprio julgamento.',
         impact: { courage: -10, justice: -15, temperance: -5 },
-        ataraxiaImpact: -20,
+        ataraxiaImpact: -15,
         feedback: 'Ao ceder para evitar desconforto, você comprometeu sua integridade moral e incentivou o erro alheio. O medo de perder a amizade revelou apego ao que é externo.',
         archetype: 'equilibrado',
         portraitSvg: PORTRAITS['Epicteto']
@@ -216,7 +216,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Sêneca',
         quote: 'A vida é curta e o tempo com quem amamos é finito e insubstituível. Não sacrifique a realidade presente pelas promessas de ganho futuro.',
         impact: { temperance: 15, wisdom: 10, justice: 10 },
-        ataraxiaImpact: 15,
+        ataraxiaImpact: 10,
         feedback: 'Você praticou a sobriedade temporal. Ao priorizar os laços profundos e a promessa familiar sobre o networking profissional, você reforçou a temperança de seus valores.',
         archetype: 'equilibrado',
         portraitSvg: PORTRAITS['Sêneca']
@@ -226,7 +226,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Marco Aurélio',
         quote: 'Cumpre teus deveres sociais com equilíbrio. O papel de provedor e trabalhador faz parte do tecido social; apenas age sem mentiras ou negligência deliberada.',
         impact: { courage: 10, wisdom: 10, temperance: -10 },
-        ataraxiaImpact: 5,
+        ataraxiaImpact: -5,
         feedback: 'Você optou por administrar os deveres externos da vida em sociedade. Negociar o tempo exige cautela para que as compensações futuras não se tornem desculpas para a ausência crônica.',
         archetype: 'guardião',
         portraitSvg: PORTRAITS['Marco Aurélio']
@@ -244,7 +244,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Sêneca',
         quote: 'O verdadeiro sábio não se envaidece com a riqueza nem se ressente com a pequenez alheia. A virtude é silenciosa e acolhedora.',
         impact: { temperance: 20, wisdom: 15, justice: 10 },
-        ataraxiaImpact: 20,
+        ataraxiaImpact: 12,
         feedback: 'Você escolheu a magnanimidade. Ao não reagir ao ciúme com arrogância ou cobrança, você demonstra que o seu valor reside na sua virtude, não na aprovação do seu grupo.',
         archetype: 'contemplativo',
         portraitSvg: PORTRAITS['Sêneca']
@@ -254,7 +254,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Epicteto',
         quote: 'Associa-te a pessoas que te elevem moralmente. Frequentar ambientes onde a virtude é ridicularizada corrompe até o caráter mais firme.',
         impact: { wisdom: 20, courage: 10, justice: -5 },
-        ataraxiaImpact: 10,
+        ataraxiaImpact: 5,
         feedback: 'Você escolheu o isolamento protetivo. Selecionar o seu círculo social é prudente para o desenvolvimento da alma, embora a perda dos velhos laços traga uma leve melancolia.',
         archetype: 'contemplativo',
         portraitSvg: PORTRAITS['Epicteto']
@@ -272,7 +272,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Epicteto',
         quote: 'O que se quebrou não era teu de forma permanente. Ao perder algo material, diga a ti mesmo: devolvi o que me havia sido emprestado.',
         impact: { temperance: 20, wisdom: 15, courage: 5 },
-        ataraxiaImpact: 20,
+        ataraxiaImpact: 15,
         feedback: 'Você praticou o desapego budista/estoico. Aceitar que objetos físicos pertencem ao fluxo da entropia poupa seu fígado do veneno da raiva impotente.',
         archetype: 'equilibrado',
         portraitSvg: PORTRAITS['Epicteto']
@@ -282,7 +282,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Marco Aurélio',
         quote: 'O dano material não atinge a mente. A má conduta do agressor pertence a ele. Limite-se a agir com eficácia prática e retidão moral.',
         impact: { courage: 15, justice: 10, wisdom: 10 },
-        ataraxiaImpact: 10,
+        ataraxiaImpact: 5,
         feedback: 'Você aliou a serenidade interna à ação pragmática do cidadão do cosmos. Resolver os problemas materiais sem se contaminar pela raiva é o equilíbrio estoico ideal.',
         archetype: 'guardião',
         portraitSvg: PORTRAITS['Marco Aurélio']
@@ -300,7 +300,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Marco Aurélio',
         quote: 'Se não é correto, não faça; se não é verdade, não diga. A integridade da alma vale mais que qualquer soma metálica.',
         impact: { justice: 25, courage: 10, wisdom: 5 },
-        ataraxiaImpact: 15,
+        ataraxiaImpact: -5,
         feedback: 'Você escolheu a justiça moral inflexível. Manter a honestidade com um estranho, mesmo diante de pressões familiares, protege o bem supremo do seu caráter.',
         archetype: 'árbitro',
         portraitSvg: PORTRAITS['Marco Aurélio']
@@ -310,7 +310,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Sêneca',
         quote: 'A virtude busca a harmonia prática. Resolver a falha antes de expor o produto atende ao dever ético sem causar rupturas desnecessárias na casa.',
         impact: { wisdom: 15, temperance: 10, justice: 10 },
-        ataraxiaImpact: 10,
+        ataraxiaImpact: 8,
         feedback: 'Sua escolha encontrou o equilíbrio prudencial. Solucionar o problema real protege o comprador de danos futuros e preserva a paz nos relacionamentos domésticos.',
         archetype: 'equilibrado',
         portraitSvg: PORTRAITS['Sêneca']
@@ -328,7 +328,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Epicteto',
         quote: 'Lembra-te de que a ofensa só existe se tu permitires. Se alguém tenta te insultar, ele está apenas batendo no vento.',
         impact: { temperance: 20, wisdom: 15, courage: -5 },
-        ataraxiaImpact: 20,
+        ataraxiaImpact: 12,
         feedback: 'Você usou o silêncio altivo e a compaixão estoica. Tratar o insulto como um ruído de fundo indiferente desarma o agressor e preserva sua tranquilidade integral.',
         archetype: 'contemplativo',
         portraitSvg: PORTRAITS['Epicteto']
@@ -338,7 +338,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Sêneca',
         quote: 'Responder à grosseria com elegância racional é a maior demonstração de poder. Não desças ao nível do ofensor; eleva-o ao teu.',
         impact: { courage: 15, wisdom: 10, justice: 10 },
-        ataraxiaImpact: 10,
+        ataraxiaImpact: 2,
         feedback: 'Você escolheu o limite pedagógico. Responder com firmeza polida sem perder o controle emocional educa o ambiente e impede que a passividade seja interpretada como covardia.',
         archetype: 'guardião',
         portraitSvg: PORTRAITS['Sêneca']
@@ -360,7 +360,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Marco Aurélio',
         quote: 'Aceite os fatos como eles se apresentam. Errar é humano; o que nos define é a velocidade e a integridade com que buscamos corrigir o rumo comum.',
         impact: { courage: 25, wisdom: 15, justice: 10 },
-        ataraxiaImpact: 20,
+        ataraxiaImpact: 5,
         feedback: 'Assumir a falha com integridade anula a ansiedade da ocultação. Você transformou um revés técnico em uma demonstração prática de liderança ética e coragem.',
         archetype: 'guardião',
         portraitSvg: PORTRAITS['Marco Aurélio']
@@ -370,7 +370,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Sêneca',
         quote: 'A razão deve analisar as coisas com calma. O orgulho tenta nos proteger da vergonha, mas fragmentar a verdade enfraquece nossa clareza sobre o ocorrido.',
         impact: { wisdom: 10, temperance: 5, courage: -5 },
-        ataraxiaImpact: 5,
+        ataraxiaImpact: -5,
         feedback: 'Você tentou racionalizar o erro para abrandar o golpe social. Embora a análise de fatores externos seja prudente, diluir a responsabilidade pode mascarar oportunidades de aprendizado.',
         archetype: 'contemplativo',
         portraitSvg: PORTRAITS['Sêneca']
@@ -388,7 +388,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Epicteto',
         quote: 'Se dizem mal de ti de forma falsa, por que te importas? A verdade não precisa de advogados histéricos; ela brilha na constância da conduta.',
         impact: { temperance: 20, wisdom: 15, courage: -5 },
-        ataraxiaImpact: 20,
+        ataraxiaImpact: 15,
         feedback: 'Você escolheu o refúgio da conduta intocável. Deixar que a integridade prática desminta a calúnia protege seu fígado da ansiedade e mostra maturidade espiritual.',
         archetype: 'contemplativo',
         portraitSvg: PORTRAITS['Epicteto']
@@ -398,7 +398,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Marco Aurélio',
         quote: 'Aja com justiça e energia. O dever social exige que a mentira não sabote o funcionamento da comunidade. Defenda a verdade com rigor.',
         impact: { courage: 20, justice: 15, wisdom: 5 },
-        ataraxiaImpact: 10,
+        ataraxiaImpact: -5,
         feedback: 'Você optou por defender a verdade institucional. Exigir o rito da justiça protege o bom andamento do time, embora o atrito processual consuma energia e foco temporariamente.',
         archetype: 'guardião',
         portraitSvg: PORTRAITS['Marco Aurélio']
@@ -416,7 +416,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Epicteto',
         quote: 'Não perdi nada; apenas devolvi à fortuna o que era dela. A mente soberana e a virtude não podem ser confiscadas por nenhum banco.',
         impact: { wisdom: 25, temperance: 20, courage: 10 },
-        ataraxiaImpact: 25,
+        ataraxiaImpact: 12,
         feedback: 'Você atingiu o ápice do desapego estoico. Entender que o dinheiro é um elemento neutro e indiferente em relação à sua capacidade de ser um homem bom é a verdadeira liberdade.',
         archetype: 'contemplativo',
         portraitSvg: PORTRAITS['Epicteto']
@@ -426,7 +426,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Sêneca',
         quote: 'O sábio prefere a riqueza por comodidade, mas não a idolatra. Diante da pobreza súbita, ele se adapta sem desespero e reconstrói o que é necessário.',
         impact: { courage: 20, temperance: 15, wisdom: 10 },
-        ataraxiaImpact: 15,
+        ataraxiaImpact: 2,
         feedback: 'Você abordou a crise com racionalidade reconstrutiva. Agir de forma prática e disciplinada diante da pobreza demonstra que a fortuna externa não dita seus passos.',
         archetype: 'equilibrado',
         portraitSvg: PORTRAITS['Sêneca']
@@ -444,7 +444,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Sêneca',
         quote: 'A fortuna nos dá e nos tira conforme seus próprios caprichos. A demissão não altera quem você é; apenas muda a sala onde você senta.',
         impact: { temperance: 20, wisdom: 15, courage: 5 },
-        ataraxiaImpact: 20,
+        ataraxiaImpact: 10,
         feedback: 'Você praticou a dignidade diante da impermanência. Sair com postura intocável mostra que seu valor intrínseco não depende da validação de nenhuma corporação.',
         archetype: 'contemplativo',
         portraitSvg: PORTRAITS['Sêneca']
@@ -454,7 +454,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Epicteto',
         quote: 'Age bem no papel que a ti foi designado. Se o papel de profissional está sendo encerrado, encerre-o exigindo o cumprimento da justiça devida.',
         impact: { courage: 20, justice: 15, wisdom: 5 },
-        ataraxiaImpact: 10,
+        ataraxiaImpact: -5,
         feedback: 'Você escolheu defender a simetria de obrigações. Exigir o rito da transparência e a compensação justa é um ato de justiça cívica, mesmo que exija confrontar a liderança.',
         archetype: 'guardião',
         portraitSvg: PORTRAITS['Epicteto']
@@ -472,7 +472,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Epicteto',
         quote: 'A doença é um obstáculo para o corpo, não para a vontade racional de agir de forma justa. Adapte-se ao instrumento que te resta.',
         impact: { wisdom: 25, temperance: 15, courage: 10 },
-        ataraxiaImpact: 20,
+        ataraxiaImpact: 12,
         feedback: 'Você abraçou o Amor Fati de forma exemplar. Compreender que o corpo físico é um empréstimo temporário da natureza poupa a alma do sofrimento do apego.',
         archetype: 'contemplativo',
         portraitSvg: PORTRAITS['Epicteto']
@@ -482,7 +482,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Marco Aurélio',
         quote: 'O corpo é a morada da alma racional; cuide dele com seriedade enquanto estiver sob sua guarda, para que você possa continuar sendo útil.',
         impact: { courage: 20, wisdom: 15, temperance: 5 },
-        ataraxiaImpact: 10,
+        ataraxiaImpact: 5,
         feedback: 'Sua escolha aliou a temperança à responsabilidade científica. Cuidar da saúde física com racionalidade é um dever estoico prático de autopreservação ativa.',
         archetype: 'guardião',
         portraitSvg: PORTRAITS['Marco Aurélio']
@@ -500,7 +500,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Sêneca',
         quote: 'A ira é uma loucura temporária que causa mais destruição do que a ofensa original. A lei deve agir com razão pura e sem paixão.',
         impact: { justice: 20, wisdom: 15, courage: 10 },
-        ataraxiaImpact: 15,
+        ataraxiaImpact: -5,
         feedback: 'Você escolheu o caminho do juiz estóico. Tratar o caso policial sem contaminação emocional permite que você tome decisões jurídicas limpas e preserva sua paz interior.',
         archetype: 'árbitro',
         portraitSvg: PORTRAITS['Sêneca']
@@ -510,7 +510,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Marco Aurélio',
         quote: 'O dever moral do cidadão é inegociável. A conduta alheia não pode macular a minha honra. Se os credores confiaram em mim, responderei.',
         impact: { justice: 25, courage: 20, wisdom: 5 },
-        ataraxiaImpact: 5,
+        ataraxiaImpact: -15,
         feedback: 'Você demonstrou integridade radical. Sacrificar seus bens para honrar compromissos que você não causou é o ápice da justiça cosmopolita estoica, embora o custo material seja severo.',
         archetype: 'guardião',
         portraitSvg: PORTRAITS['Marco Aurélio']
@@ -532,7 +532,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Epicteto',
         quote: 'O corpo é um instrumento sob nossa guarda, não nosso senhor. Saber dizer não ao excesso é zelar pela sanidade da alma e do julgamento.',
         impact: { temperance: 20, wisdom: 10, courage: 5 },
-        ataraxiaImpact: 15,
+        ataraxiaImpact: 12,
         feedback: 'Você praticou a moderação ao reconhecer seus limites biológicos. Preservar-se contra a exaustão impede que a pressa comprometa o discernimento e a qualidade das suas futuras ações.',
         archetype: 'equilibrado',
         portraitSvg: PORTRAITS['Epicteto']
@@ -560,7 +560,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Epicteto',
         quote: 'A dor é uma sensação no corpo, não uma opinião da mente sobre a vida. Ela pode atingir a carne, mas nunca a vontade racional.',
         impact: { wisdom: 25, courage: 15, temperance: 10 },
-        ataraxiaImpact: 20,
+        ataraxiaImpact: 10,
         feedback: 'Você ergueu a cidadela interna. Desacoplar a sensação de dor biológica do sofrimento psicológico é uma das conquistas mais difíceis da disciplina estoica.',
         archetype: 'contemplativo',
         portraitSvg: PORTRAITS['Epicteto']
@@ -570,7 +570,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Sêneca',
         quote: 'Devemos cuidar da saúde do corpo com carinho, mas sem aflição. A reabilitação exige método, paciência e submissão à ciência médica.',
         impact: { temperance: 20, courage: 10, wisdom: 10 },
-        ataraxiaImpact: 15,
+        ataraxiaImpact: 5,
         feedback: 'Você escolheu o pragmatismo prudente. Tratar a lesão de forma metódica e livre de desespero demonstra que você cuida da sua morada física com equilíbrio.',
         archetype: 'equilibrado',
         portraitSvg: PORTRAITS['Sêneca']
@@ -588,7 +588,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Epicteto',
         quote: 'Abstém-te daquilo que dita teu humor. A verdadeira liberdade é não precisar de nada que a fortuna possa te retirar amanhã.',
         impact: { temperance: 25, courage: 15, wisdom: 5 },
-        ataraxiaImpact: 10,
+        ataraxiaImpact: -5,
         feedback: 'Você escolheu a ascese ativa. O desconforto voluntário destrói a dependência psicológica e prova que a mente racional reina soberana sobre os instintos primordiais.',
         archetype: 'guardião',
         portraitSvg: PORTRAITS['Epicteto']
@@ -598,7 +598,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Sêneca',
         quote: 'A moderação é mais difícil que a abstinência completa, pois exige vigilância constante da razão sobre o limite exato do uso.',
         impact: { temperance: 20, wisdom: 15, justice: 5 },
-        ataraxiaImpact: 15,
+        ataraxiaImpact: 8,
         feedback: 'Você optou pelo caminho do consumo temperado. Monitorar os desejos e impor regras racionais de moderação exige vigilância contínua da inteligência moral.',
         archetype: 'equilibrado',
         portraitSvg: PORTRAITS['Sêneca']
@@ -616,7 +616,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Sêneca',
         quote: 'A velhice é cheia de prazeres se soubermos como usá-la. A maturação do caráter compensa com sobra a perda do vigor físico.',
         impact: { wisdom: 20, temperance: 15, courage: 5 },
-        ataraxiaImpact: 20,
+        ataraxiaImpact: 12,
         feedback: 'Você praticou a aceitação racional do tempo. Enxergar o envelhecimento como a colheita da sabedoria liberta você da ilusão da vaidade infantil.',
         archetype: 'contemplativo',
         portraitSvg: PORTRAITS['Sêneca']
@@ -626,7 +626,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Marco Aurélio',
         quote: 'Observe o ciclo dos astros e mude junto com o cosmos. Adapte seu corpo com inteligência para continuar útil ao tecido social comum.',
         impact: { courage: 15, wisdom: 10, temperance: 10 },
-        ataraxiaImpact: 15,
+        ataraxiaImpact: 8,
         feedback: 'Você escolheu o cuidado ativo. Mapear e aceitar as novas restrições físicas para ajustar a biologia às necessidades do dever prático é excelente conduta.',
         archetype: 'equilibrado',
         portraitSvg: PORTRAITS['Marco Aurélio']
@@ -644,7 +644,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Marco Aurélio',
         quote: 'Não sacrifique o instrumento da razão pelo entusiasmo desordenado. A moderação diária protege a longevidade da nossa utilidade no mundo.',
         impact: { temperance: 20, wisdom: 15, courage: 5 },
-        ataraxiaImpact: 15,
+        ataraxiaImpact: 10,
         feedback: 'Você praticou a prudência biológica. Preservar o sono protege o discernimento e impede que a ansiedade disfarçada de produtividade domine seus hábitos.',
         archetype: 'equilibrado',
         portraitSvg: PORTRAITS['Marco Aurélio']
@@ -672,7 +672,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Epicteto',
         quote: 'A morte e a doença não são terríveis; o terrível é a opinião mental que temos sobre a doença e a morte.',
         impact: { wisdom: 25, temperance: 15, courage: 10 },
-        ataraxiaImpact: 20,
+        ataraxiaImpact: 12,
         feedback: 'Você desarmou a paranoia. Afastar-se do fluxo informativo de pânico e focar na observação neutra do corpo restaura a sobriedade da alma.',
         archetype: 'contemplativo',
         portraitSvg: PORTRAITS['Epicteto']
@@ -682,7 +682,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Sêneca',
         quote: 'Sofremos muito mais na imaginação do que na realidade física. Recorra aos fatos e à ciência médica para dissipar os fantasmas do medo.',
         impact: { courage: 15, wisdom: 15, temperance: 10 },
-        ataraxiaImpact: 15,
+        ataraxiaImpact: 5,
         feedback: 'Você aliou a razão cívica à ciência prática. Dissipar a hipocondria com exames factuais impede que a fantasia sabote sua paz interior.',
         archetype: 'equilibrado',
         portraitSvg: PORTRAITS['Sêneca']
@@ -704,7 +704,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Marco Aurélio',
         quote: 'Se alguém me provar que estou errado e me convencer disso, mudarei de bom grado. Busco a verdade, pela qual ninguém jamais foi prejudicado.',
         impact: { wisdom: 20, courage: 15, justice: 5 },
-        ataraxiaImpact: 20,
+        ataraxiaImpact: 5,
         feedback: 'Você demonstrou a plasticidade da mente sábia. Mudar de opinião diante da verdade não é fraqueza, mas sim o alinhamento do caráter com a realidade objetiva.',
         archetype: 'árbitro',
         portraitSvg: PORTRAITS['Marco Aurélio']
@@ -714,7 +714,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Sêneca',
         quote: 'Agradar a multidão exige que nos moldemos aos seus caprichos. Ceder ao clamor da turba apenas por paz imediata enfraquece o vigor da alma.',
         impact: { temperance: 5, courage: -20, wisdom: -10 },
-        ataraxiaImpact: -10,
+        ataraxiaImpact: -5,
         feedback: 'Você escolheu o caminho do menor atrito social sacrificando sua integridade intelectual. O silêncio forçado pelo medo do conflito debilita a firmeza estoica diante das adversidades.',
         archetype: 'contemplativo',
         portraitSvg: PORTRAITS['Sêneca']
@@ -732,7 +732,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Epicteto',
         quote: 'A pobreza virtuosa é mais livre do que a riqueza cúmplice. Não troques a soberania do teu caráter por ornamentos da fortuna.',
         impact: { justice: 25, courage: 15, wisdom: 5 },
-        ataraxiaImpact: 20,
+        ataraxiaImpact: 10,
         feedback: 'Você praticou a justiça inegociável. Entender que o dinheiro é um preferível indiferente e que a integridade ética é o único bem real é a essência do estoicismo prático.',
         archetype: 'árbitro',
         portraitSvg: PORTRAITS['Epicteto']
@@ -742,7 +742,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Sêneca',
         quote: 'O sábio não rejeita a riqueza se ela puder ser obtida sem desonra. Ele a usa como ferramenta útil, mas mantém-se senhor dela.',
         impact: { wisdom: 20, temperance: 15, justice: 10 },
-        ataraxiaImpact: 10,
+        ataraxiaImpact: 2,
         feedback: 'Você optou pelo caminho da negociação equilibrada. Usar a fortuna externa de forma regulada sem comprometer a essência ética do projeto é excelente manifestação de prudência.',
         archetype: 'equilibrado',
         portraitSvg: PORTRAITS['Sêneca']
@@ -760,7 +760,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Sêneca',
         quote: 'Chorar a perda de um amigo é humano; lamentar-se com rebeldia contra a natureza é tolice. Agradeça pelo tempo que a fortuna te concedeu ao lado dele.',
         impact: { wisdom: 25, courage: 20, temperance: 10 },
-        ataraxiaImpact: 15,
+        ataraxiaImpact: 8,
         feedback: 'Você abraçou a sobriedade emocional no luto. Aceitar a finitude dos entes queridos sem desespero reconhece que tudo o que amamos pertence ao fluxo universal.',
         archetype: 'contemplativo',
         portraitSvg: PORTRAITS['Sêneca']
@@ -770,7 +770,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Epicteto',
         quote: 'Não tentes prender o que flui. Transforme a saudade em utilidade ativa para o bem da comunidade cívica; faça do amor ação moral.',
         impact: { justice: 25, courage: 15, wisdom: 10 },
-        ataraxiaImpact: 10,
+        ataraxiaImpact: 2,
         feedback: 'Você transformou o luto em cosmopolitismo ativo. Direcionar o sofrimento pessoal para o alívio da dor coletiva é a maior manifestação de justiça estoica.',
         archetype: 'árbitro',
         portraitSvg: PORTRAITS['Epicteto']
@@ -788,7 +788,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Marco Aurélio',
         quote: 'O obstáculo é o caminho. O que impede a ação física pode ser utilizado pela mente para exercitar a virtude da adaptação e da paciência.',
         impact: { wisdom: 20, temperance: 20, courage: 5 },
-        ataraxiaImpact: 20,
+        ataraxiaImpact: 12,
         feedback: 'Você praticou a plasticidade mental ideal. Transformar o plano cancelado em oportunidade para treinar a paciência e a alegria local é um marco de maturidade moral.',
         archetype: 'equilibrado',
         portraitSvg: PORTRAITS['Marco Aurélio']
@@ -798,7 +798,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Epicteto',
         quote: 'O tempo e o clima não respondem à tua vontade. Aceite o que acontece como necessário e foca em resolver o que te cabe com razão pura.',
         impact: { temperance: 20, wisdom: 15, courage: 10 },
-        ataraxiaImpact: 15,
+        ataraxiaImpact: 5,
         feedback: 'Você abordou o imprevisto com frieza pragmática. Resolver as contingências legais sem contaminação emocional de raiva ou frustração preserva sua paz interior.',
         archetype: 'contemplativo',
         portraitSvg: PORTRAITS['Epicteto']
@@ -816,7 +816,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Marco Aurélio',
         quote: 'A esmeralda não perde o seu valor por falta de elogios, nem a lama se torna nobre pelo aplauso. Foca no teu dever; a bajulação é poeira.',
         impact: { temperance: 20, wisdom: 15, justice: 10 },
-        ataraxiaImpact: 20,
+        ataraxiaImpact: 12,
         feedback: 'Você ignorou o canto da sereia da vaidade. Manter-se imune ao elogio interesseiro é a base da sobriedade mental de quem governa a si mesmo.',
         archetype: 'contemplativo',
         portraitSvg: PORTRAITS['Marco Aurélio']
@@ -826,7 +826,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Sêneca',
         quote: 'O elogio falso é um veneno adocicado. O sábio o neutraliza devolvendo a conversa para a realidade dos fatos e do esforço comum.',
         impact: { wisdom: 15, justice: 15, courage: 5 },
-        ataraxiaImpact: 15,
+        ataraxiaImpact: 8,
         feedback: 'Você desarmou a adulação com pragmatismo. Trazer o foco de volta para o trabalho coletivo neutraliza a falsidade e protege o ambiente de intrigas de interesse.',
         archetype: 'árbitro',
         portraitSvg: PORTRAITS['Sêneca']
@@ -844,7 +844,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Epicteto',
         quote: 'A virtude não se veste para o público. A conduta na escuridão, quando ninguém observa, é o único espelho real do teu caráter.',
         impact: { justice: 25, temperance: 15, courage: 5 },
-        ataraxiaImpact: 20,
+        ataraxiaImpact: 12,
         feedback: 'Você praticou a retidão incondicional. Compreender que a integridade íntima não depende de vigilância externa é a máxima realização da liberdade interior estoica.',
         archetype: 'árbitro',
         portraitSvg: PORTRAITS['Epicteto']
@@ -854,7 +854,7 @@ const SCENARIOS_INTERNAL: Scenario[] = [
         philosopher: 'Sêneca',
         quote: 'O cidadão virtuoso contribui ativamente para a ordem da sua comunidade. Realizar o rito da devolução é o dever prático que organiza o todo.',
         impact: { justice: 25, courage: 10, wisdom: 10 },
-        ataraxiaImpact: 15,
+        ataraxiaImpact: 5,
         feedback: 'Você escolheu a ação cívica disciplinada. Despender tempo pessoal para garantir que a propriedade alheia retorne ao rito da integridade fortalece o tecido social comum.',
         archetype: 'guardião',
         portraitSvg: PORTRAITS['Sêneca']
