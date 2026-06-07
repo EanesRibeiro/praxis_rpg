@@ -42,6 +42,20 @@ export default {
         cinzel: ['Cinzel', 'Georgia', 'serif'],
         inter: ['Inter', 'sans-serif'],
       },
+      animation: {
+        'fade-in': 'fadeIn 200ms ease-in forwards',
+        'fade-out': 'fadeOut 150ms ease-out forwards',
+      },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        fadeOut: {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' },
+        },
+      },
     },
   },
   plugins: [],

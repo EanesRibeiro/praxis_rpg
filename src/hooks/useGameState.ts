@@ -1,7 +1,7 @@
 import { useReducer, useEffect } from 'react';
 import type { GameState } from '../types';
 import { makeChoice as applyChoice, getProfile, drawSessionScenarios } from '../utils/gameLogic';
-import { saveSession, getPlayedHistory, updatePlayedIndexAfterDraw } from '../utils/storage';
+import { saveSession, getPlayedHistory } from '../utils/storage';
 import { SCENARIO_POOL } from '../data/scenarios';
 
 const getInitialState = (): GameState => ({
@@ -25,7 +25,6 @@ function gameReducer(state: GameState, action: Action): GameState {
     case 'START_GAME': {
       const history = getPlayedHistory();
       const chosen = drawSessionScenarios(SCENARIO_POOL, history);
-      updatePlayedIndexAfterDraw(chosen, SCENARIO_POOL);
       return {
         ...state,
         sessionScenarios: chosen,

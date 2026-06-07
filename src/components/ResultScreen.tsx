@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react';
 import type { Virtues } from '../types';
 import { getProfile } from '../utils/gameLogic';
 import { ResultCard } from './ResultCard';
-import { Download } from 'lucide-react';
+import { Download, Clipboard } from 'lucide-react';
 import html2canvas from 'html2canvas';
 
 interface ResultScreenProps {
@@ -25,23 +25,40 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({ virtues, ataraxia, o
 
   const profile = getProfile(virtues, ataraxia);
 
+  const handleCopyToClipboard = async () => {
+    const textToCopy = `Concluí a Práxis Estoica de hoje. 
+Meu perfil de tomada de decisão foi classificado como: ${profile.name} com ${ataraxia}% de Ataraxia (Tranquilidade da Alma) diante de crises e dilemas cotidianos.
+
+Como você reagiria sob a ótica de Sêneca e Marco Aurélio? Teste seu caráter na prática.
+Jogue aqui: https://eanesribeiro.github.io/praxis_rpg/
+
+#Estoicismo #ProductManagement #DataEngineering #Analytics`;
+
+    try {
+      await navigator.clipboard.writeText(textToCopy);
+      alert('Texto formatado copiado para a área de transferência! Só colar no LinkedIn junto com o seu card.');
+    } catch (err) {
+      console.error('Falha ao copiar texto: ', err);
+    }
+  };
+
   const handleExport = async () => {
     if (!cardRef.current || isExporting) return;
     setIsExporting(true);
 
-    // Pequeno delay para garantir que qualquer renderização de estado anterior terminou
+    // Pequeno delay para garantir que qualquer renderização de estado anterior terminou e posicionamento limpo para captura
     setTimeout(async () => {
       try {
         const canvas = await html2canvas(cardRef.current!, {
           backgroundColor: '#0D0D0D',
-          scale: 2, // Garante escala 2x (1600x900)
+          scale: 2, // Mantém alta qualidade para exibição no feed do LinkedIn
           useCORS: true,
           allowTaint: true,
           logging: false,
         });
 
         const link = document.createElement('a');
-        link.download = `askesis-praxis-${Date.now()}.png`;
+        link.download = `praxis-estoica-${Date.now()}.png`;
         link.href = canvas.toDataURL('image/png');
         link.click();
       } catch (err) {
@@ -144,6 +161,15 @@ export const ResultScreen: React.FC<ResultScreenProps> = ({ virtues, ataraxia, o
         >
           <Download className="w-4 h-4" />
           {isExporting ? 'Processando Card...' : 'Baixar Card para LinkedIn'}
+        </button>
+
+        {/* Botão Copiar Texto */}
+        <button
+          onClick={handleCopyToClipboard}
+          className="flex items-center justify-center gap-2 w-full py-2.5 border border-bronze-dark bg-obsidian-2 text-ivory hover:bg-obsidian-4 font-cinzel text-[11px] font-600 tracking-[1px] uppercase rounded-sm cursor-pointer transition-all duration-200 outline-none"
+        >
+          <Clipboard className="w-3.5 h-3.5" />
+          Copiar Texto para Post do LinkedIn
         </button>
 
         {/* Botão Jogar Novamente */}

@@ -1,4 +1,5 @@
 import type { StoredSession, ChoiceRecord, Scenario, ScenarioCategory } from '../types';
+import { SCENARIO_POOL } from '../data/scenarios';
 
 const STORAGE_KEY = 'askesis_history';
 const MAX_SESSIONS = 10;
@@ -115,6 +116,42 @@ export function updatePlayedIndexAfterDraw(
       index[cat].push(s.id);
     }
   });
+
+  savePlayedIndex(index);
+}
+
+/**
+ * Grava o ID do cenário no histórico de jogados imediatamente no momento da escolha.
+ * Se a categoria atingir a saturação (todos jogados), limpa seu histórico específico.
+ */
+export function savePlayedScenarioId(scenarioId: string): void {
+  const index = loadPlayedIndex();
+  
+  // Encontra a categoria correspondente a este cenário no SCENARIO_POOL
+  let category: ScenarioCategory | null = null;
+  for (const [cat, list] of Object.entries(SCENARIO_POOL)) {
+    if (list.some(s => s.id === scenarioId)) {
+      category = cat as ScenarioCategory;
+      break;
+    }
+  }
+
+  if (!category) return;
+
+  const poolSize = SCENARIO_POOL[category]?.length || 6;
+
+  // Se todos os cenários daquela categoria já foram jogados, reseta o histórico dela
+  if (index[category] && index[category].length >= poolSize) {
+    index[category] = [];
+  }
+
+  if (!index[category]) {
+    index[category] = [];
+  }
+
+  if (!index[category].includes(scenarioId)) {
+    index[category].push(scenarioId);
+  }
 
   savePlayedIndex(index);
 }

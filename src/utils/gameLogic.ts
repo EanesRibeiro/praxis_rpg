@@ -1,4 +1,5 @@
 import type { GameState, Scenario, Virtues, VirtueKey, ArchetypeKey, Profile, ScenarioCategory, ChoiceRecord } from '../types';
+import { savePlayedScenarioId } from './storage';
 
 export function clamp(value: number, min: number, max: number): number {
   return Math.min(max, Math.max(min, value));
@@ -25,6 +26,9 @@ export function drawSessionScenarios(
 export function makeChoice(state: GameState, choiceIndex: 0 | 1, scenarios: Scenario[]): GameState {
   const scenario = scenarios[state.currentScenarioIndex];
   const choice = scenario.choices[choiceIndex];
+
+  // Grava o ID no histórico de jogados imediatamente no momento da escolha
+  savePlayedScenarioId(scenario.id);
 
   const newVirtues = { ...state.virtues };
   (Object.entries(choice.impact) as [VirtueKey, number][]).forEach(([key, delta]) => {
